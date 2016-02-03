@@ -13,23 +13,14 @@
                 $.ajax({
                     type: "POST",
                     url: "Ninja.aspx/GetName",
-                    data: '{name: "Ricom"}',
+                    data: JSON.stringify({name: 'Ricom'}),
                     contentType: "application/json; charset=utf-8",
-                    //dataType: "json",
-                    //success: OnSuccess,
-                    //failure: function (response) {
-                    ///    alert(response.d);
-                    //}
-                    statusCode: {
-                        200: function (data) {
-                            alert('200: Authenticated');
-                            // Bind the JSON data to the UI
-                        },
-                        401: function (data) {
-                            alert('401: Unauthenticated');
-                            // Handle the 401 error here.
-                        }
+                    dataType: "json",
+                    success: OnSuccess,
+                    failure: function (response) {
+                        alert(response.d);
                     }
+                    
                 });
 
             }
