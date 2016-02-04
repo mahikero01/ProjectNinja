@@ -111,9 +111,46 @@ namespace ProjectNinja.Modules
                     return resultSet;
                 }
             }
-            public void ModifyDataStoredProcedure()
-            { 
-            
+
+
+            public int ModifyDataStoredProcedure(string storedProcedure)
+            {
+                int recordsAffected = 0;
+
+                try
+                {
+
+                    this.GetDBConnection();
+                    this._dbConnection.Open();
+                    SqlTransaction transaction;
+                    transaction = this._dbConnection.BeginTransaction();
+                    SqlCommand query = new SqlCommand(storedProcedure, this._dbConnection, transaction);
+                    query.CommandType = CommandType.StoredProcedure;
+
+                    recordsAffected = 1;
+                    query.ExecuteNonQuery();
+                    transaction.Commit();
+
+                    transaction.Dispose();
+                    transaction = null;
+                    query.Dispose();
+                    query = null;
+                    this.CloseConnection();
+
+                    return recordsAffected;
+                }
+                catch (SqlException sqlException)
+                {
+                    _errorMessage = "SQL Error: Number - " + sqlException.Number + ", " + sqlException.Message;
+                    this.CloseConnection();
+                    return recordsAffected;
+                }
+                catch (Exception exception)
+                {
+                    _errorMessage = "Runtime Error - " + exception.Message;
+                    this.CloseConnection();
+                    return recordsAffected;
+                }
             }
 
         #endregion

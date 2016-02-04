@@ -31,6 +31,11 @@ namespace ProjectNinja.Modules
                 return this.GetDataStoredProcedure(@"USP_StudentDetailsProc2", arrayOfParameter );
             }
 
+            public int InsertData()
+            {
+                return this.ModifyDataStoredProcedure(@"USP_StudentDetailsProc3");   
+            }
+
         #endregion
     }
 }

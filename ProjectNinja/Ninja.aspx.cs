@@ -85,8 +85,19 @@ namespace ProjectNinja
 
             data.Tables.Add(ninja.GetAllDetailsByName());
             return data.GetXml();
-
         }
+
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string InsertData(List<string> backArrayParam)
+        {
+            Modules.Ninja ninja = new Modules.Ninja();
+
+            return ninja.InsertData().ToString();
+        }
+
+
+
+
         protected void DBConnectionTest(object sender, EventArgs e)
         {
             DBModel dbmodel = new DBModel();

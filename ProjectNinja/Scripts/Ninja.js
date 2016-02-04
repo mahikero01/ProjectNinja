@@ -33,12 +33,41 @@
 
         }//function GetAllDetailsByName()
 
-    
+    function InsertData() {
+
+        var frontArrayParam = new Array();
+
+        $.ajax({
+
+            type: "POST",
+            url: "Ninja.aspx/InsertData",
+            data: JSON.stringify({ backArrayParam: frontArrayParam }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function AjaxSucceded(response) {
+
+                alert(response.d);
+
+            },//function AjaxSucceded(response)
+
+            error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
+            failure: function AjaxFailure(response) { alert(response.status + ' ' + response.responseText); }
+
+        });//$.ajax
+
+    }
+
     return {
 
         GetAllDetailsByName: function () {
 
             GetAllDetailsByName();
+
+        },
+
+        InsertData: function () {
+
+            InsertData();
 
         }
 
