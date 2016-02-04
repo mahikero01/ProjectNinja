@@ -59,11 +59,13 @@ namespace ProjectNinja.Modules
                 catch (SqlException sqlException)
                 {
                     _errorMessage = "SQL Error: Number - " + sqlException.Number + ", " + sqlException.Message;
+                    this.CloseConnection();
                     return resultSet;
                 }
                 catch(Exception exception)
                 {
                     _errorMessage = "Runtime Error - " + exception.Message;
+                    this.CloseConnection();
                     return resultSet;
                 }
                 
@@ -103,11 +105,13 @@ namespace ProjectNinja.Modules
                 catch (SqlException sqlException)
                 {
                     _errorMessage = "SQL Error: Number - " + sqlException.Number + ", " + sqlException.Message;
+                    this.CloseConnection();
                     return resultSet;
                 }
                 catch (Exception exception)
                 {
                     _errorMessage = "Runtime Error - " + exception.Message;
+                    this.CloseConnection();
                     return resultSet;
                 }
             }
@@ -126,6 +130,51 @@ namespace ProjectNinja.Modules
                     transaction = this._dbConnection.BeginTransaction();
                     SqlCommand query = new SqlCommand(storedProcedure, this._dbConnection, transaction);
                     query.CommandType = CommandType.StoredProcedure;
+                    recordsAffected = 1;
+                    query.ExecuteNonQuery();
+                    transaction.Commit();
+
+                    transaction.Dispose();
+                    transaction = null;
+                    query.Dispose();
+                    query = null;
+                    this.CloseConnection();
+
+                    return recordsAffected;
+                }
+                catch (SqlException sqlException)
+                {
+                    _errorMessage = "SQL Error: Number - " + sqlException.Number + ", " + sqlException.Message;
+                    this.CloseConnection();
+                    return recordsAffected;
+                }
+                catch (Exception exception)
+                {
+                    _errorMessage = "Runtime Error - " + exception.Message;
+                    this.CloseConnection();
+                    return recordsAffected;
+                }
+            }
+
+
+            public int ModifyDataStoredProcedure(string storedProcedure, SqlParameterCollection storedProcedureParameter)
+            {
+                int recordsAffected = 0;
+
+                try
+                {
+
+                    this.GetDBConnection();
+                    this._dbConnection.Open();
+                    SqlTransaction transaction;
+                    transaction = this._dbConnection.BeginTransaction();
+                    SqlCommand query = new SqlCommand(storedProcedure, this._dbConnection, transaction);
+                    query.CommandType = CommandType.StoredProcedure;
+
+                    foreach (SqlParameter parameter in storedProcedureParameter)
+                    {
+                        query.Parameters.Add(parameter.ParameterName, parameter.SqlDbType).Value = parameter.Value;
+                    }
 
                     recordsAffected = 1;
                     query.ExecuteNonQuery();
@@ -151,6 +200,7 @@ namespace ProjectNinja.Modules
                     this.CloseConnection();
                     return recordsAffected;
                 }
+            
             }
 
         #endregion

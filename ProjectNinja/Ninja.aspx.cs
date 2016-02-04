@@ -95,7 +95,19 @@ namespace ProjectNinja
             return ninja.InsertData().ToString();
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string InsertData2(List<string> backArrayParam)
+        {
+            Modules.Ninja ninja = new Modules.Ninja();
 
+            ninja.RollNo = backArrayParam[0];
+            ninja.Name = backArrayParam[1];
+            ninja.Department = backArrayParam[2];
+            ninja.Section = backArrayParam[3];
+
+            return ninja.InsertData2().ToString();
+
+        }
 
 
         protected void DBConnectionTest(object sender, EventArgs e)

@@ -36,6 +36,7 @@
     function InsertData() {
 
         var frontArrayParam = new Array();
+        
 
         $.ajax({
 
@@ -57,6 +58,35 @@
 
     }
 
+    function InsertData2() {
+
+        var frontArrayParam = new Array();
+        frontArrayParam[0] = 'YR08';
+        frontArrayParam[1] = 'Rico';
+        frontArrayParam[2] = 'EE';
+        frontArrayParam[3] = 'D2';
+
+        $.ajax({
+
+            type: "POST",
+            url: "Ninja.aspx/InsertData2",
+            data: JSON.stringify({ backArrayParam: frontArrayParam }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function AjaxSucceded(response) {
+
+                alert(response.d);
+
+            },//function AjaxSucceded(response)
+
+            error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
+            failure: function AjaxFailure(response) { alert(response.status + ' ' + response.responseText); }
+
+        });//$.ajax
+
+    }
+
+
     return {
 
         GetAllDetailsByName: function () {
@@ -68,6 +98,12 @@
         InsertData: function () {
 
             InsertData();
+
+        },
+
+        InsertData2: function () {
+
+            InsertData2();
 
         }
 
