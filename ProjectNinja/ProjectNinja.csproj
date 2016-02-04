@@ -108,6 +108,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Ninja2.aspx" />
+    <Content Include="Scripts\Ninja.js" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Ninja.aspx" />
@@ -187,6 +188,7 @@
     </Compile>
     <Compile Include="Modules\Class1.cs" />
     <Compile Include="Modules\DBModel.cs" />
+    <Compile Include="Modules\Ninja.cs" />
     <Compile Include="Ninja.aspx.cs">
       <DependentUpon>Ninja.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

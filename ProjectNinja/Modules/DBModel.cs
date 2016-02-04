@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace ProjectNinja.Modules
 {
@@ -73,6 +70,47 @@ namespace ProjectNinja.Modules
 
             }
 
+
+            public DataTable GetDataStoredProcedure(string storedProcedure, SqlParameterCollection storedProcedureParameter) 
+            {
+                DataTable resultSet = null;
+
+                try
+                {
+                    this.GetDBConnection();
+                    SqlCommand query = new SqlCommand(storedProcedure, this._dbConnection);
+                    query.CommandType = CommandType.StoredProcedure;
+
+                    foreach (SqlParameter parameter in storedProcedureParameter)
+                    {
+                        query.Parameters.Add(parameter.ParameterName, parameter.SqlDbType).Value = parameter.Value;
+                    }
+
+                    this._dbConnection.Open();
+
+                    SqlDataAdapter dbAdapter = new SqlDataAdapter(query);
+                    resultSet = new DataTable();
+                    dbAdapter.Fill(resultSet);
+
+                    dbAdapter.Dispose();
+                    dbAdapter = null;
+                    query.Dispose();
+                    query = null;
+                    this.CloseConnection();
+
+                    return resultSet;
+                }
+                catch (SqlException sqlException)
+                {
+                    _errorMessage = "SQL Error: Number - " + sqlException.Number + ", " + sqlException.Message;
+                    return resultSet;
+                }
+                catch (Exception exception)
+                {
+                    _errorMessage = "Runtime Error - " + exception.Message;
+                    return resultSet;
+                }
+            }
             public void ModifyDataStoredProcedure()
             { 
             

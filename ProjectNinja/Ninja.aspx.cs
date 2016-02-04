@@ -71,19 +71,22 @@ namespace ProjectNinja
             DataSet data = new DataSet();
             Modules.Ninja ninja = new Modules.Ninja();
 
-            try
-            {
-                data.Tables.Add(ninja.GetAllDetails());
-            }
-            catch (Exception exception)
-            { 
-            
-            }
-
+            data.Tables.Add(ninja.GetAllDetails());
             return data.GetXml();
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string GetAllDetailsByName(List<string> backArrayParam)
+        {
+            DataSet data = new DataSet();
+            Modules.Ninja ninja = new Modules.Ninja();
 
+            ninja.Name = backArrayParam[0];
+
+            data.Tables.Add(ninja.GetAllDetailsByName());
+            return data.GetXml();
+
+        }
         protected void DBConnectionTest(object sender, EventArgs e)
         {
             DBModel dbmodel = new DBModel();
