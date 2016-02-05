@@ -186,7 +186,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Class1.cs" />
     <Compile Include="Modules\DBModel.cs" />
     <Compile Include="Modules\Ninja.cs" />
     <Compile Include="Ninja.aspx.cs">

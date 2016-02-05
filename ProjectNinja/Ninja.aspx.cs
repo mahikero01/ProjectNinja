@@ -109,6 +109,13 @@ namespace ProjectNinja
 
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string WithReturn(List<string> backArrayParam)
+        {
+            Modules.Ninja ninja = new Modules.Ninja();
+
+            return ninja.WithReturn().ToString();
+        }
 
         protected void DBConnectionTest(object sender, EventArgs e)
         {

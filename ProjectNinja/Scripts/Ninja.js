@@ -87,6 +87,30 @@
     }
 
 
+    function WithReturn2() {
+
+        var frontArrayParam = new Array();
+        alert("hello");
+        $.ajax({
+
+            type: "POST",
+            url: "Ninja.aspx/WithReturn",
+            data: JSON.stringify({ backArrayParam: frontArrayParam }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function AjaxSucceded(response) {
+
+                alert(response.d);
+
+            },//function AjaxSucceded(response)
+
+            error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
+            failure: function AjaxFailure(response) { alert(response.status + ' ' + response.responseText); }
+
+        });//$.ajax
+
+    }
+
     return {
 
         GetAllDetailsByName: function () {
@@ -104,6 +128,12 @@
         InsertData2: function () {
 
             InsertData2();
+
+        },
+
+        WithReturn2: function () {
+
+            WithReturn2();
 
         }
 
@@ -166,6 +196,30 @@
         }
 
     });
+
+    }
+
+    function WithReturn2() {
+        //alert("hello");
+        var frontArrayParam = new Array();
+        //alert("hello");
+        $.ajax({
+
+            type: "POST",
+            url: "Ninja.aspx/WithReturn",
+            data: JSON.stringify({ backArrayParam: frontArrayParam }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function AjaxSucceded(response) {
+
+                alert(response.d);
+
+            },//function AjaxSucceded(response)
+
+            error: function AjaxError(response) { alert(response.status + ' ' + response.responseText); },
+            failure: function AjaxFailure(response) { alert(response.status + ' ' + response.responseText); }
+
+        });//$.ajax
 
     }
 
