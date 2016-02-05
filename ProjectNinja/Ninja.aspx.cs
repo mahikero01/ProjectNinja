@@ -117,6 +117,16 @@ namespace ProjectNinja
             return ninja.WithReturn().ToString();
         }
 
+        [System.Web.Services.WebMethodAttribute(), System.Web.Script.Services.ScriptMethodAttribute()]
+        public static string WithReturn3(List<string> backArrayParam)
+        {
+            Modules.Ninja ninja = new Modules.Ninja();
+
+            ninja.Rico = Convert.ToInt32(backArrayParam[0]);
+
+            return ninja.WithReturn3().ToString();
+        }
+
         protected void DBConnectionTest(object sender, EventArgs e)
         {
             DBModel dbmodel = new DBModel();

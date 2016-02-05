@@ -16,7 +16,7 @@
         <asp:Button ID="Button1" runat="server" OnClick="AspButton" Text="Button" class="btn btn-primary btn-lg" />
 
 <input id="btnGetTime" type="button" value="Show Current Time" 
-    onclick = "NinjaFunctions.WithReturn2()" />
+    onclick = "NinjaFunctions.WithReturn3()" />
         
         <asp:Button ID="Button2" runat="server" OnClick="DBConnectionTest" Text="Test" />
         

@@ -11,6 +11,7 @@ namespace ProjectNinja.Modules
             private string _name;
             private string _department;
             private string _section;
+            private int _rico;
 
         #endregion
 
@@ -20,6 +21,7 @@ namespace ProjectNinja.Modules
             public string Name { set { this._name = value; } }
             public string Department { set { this._department = value; } }
             public string Section { set { this._section = value; } }
+            public int Rico { set { this._rico = value; } }
 
         #endregion
 
@@ -57,6 +59,14 @@ namespace ProjectNinja.Modules
             public int WithReturn()
             {
                 return this.ModifyDataStoredProcedureWithReturn(@"USP_StudentDetailsProc5");
+            }
+
+            public int WithReturn3()
+            {
+                var arrayOfParameter = new SqlCommand().Parameters;
+                arrayOfParameter.AddWithValue("@rico", _rico);
+
+                return this.ModifyDataStoredProcedureWithReturn(@"USP_StudentDetailsProc6", arrayOfParameter);
             }
 
         #endregion
